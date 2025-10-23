@@ -70,9 +70,6 @@ You can connect to your EC2 instance using **one of the following methods** 👇
 
 A terminal will open directly in your browser window.
 
-**📸 Screenshot:**
-![EC2 Connect](images/ec2-connect.png)
-
 ---
 
 #### 🧩 Method 2: PuTTY (Windows SSH Client)
@@ -174,8 +171,6 @@ If everything is configured correctly, your static website should load successfu
 **📸 Screenshot:**
 ![Website Deployed](images/website-deployed.png)
 
-![Website Deployed 2](images/website-deployed-2.png)
-
 ---
 
 ### 🔒 Step 7: Configure Firewall (Optional)
@@ -231,4 +226,5 @@ Follow the on-screen instructions to automatically install an SSL certificate.
 Deployed with ❤️ on **AWS Cloud** using **EC2 & Apache2**.
 
 ---
+
 
