@@ -42,6 +42,8 @@ The website is now accessible through the EC2 public IP address.
 **📸 Screenshot:**
 ![EC2 Instance Launch](images/ec2-launch.png)
 
+![EC2 Instance](images/ec2-ubuntu.png)
+
 ---
 
 ### 🔐 Step 2: Configure Security Group
@@ -229,3 +231,4 @@ Follow the on-screen instructions to automatically install an SSL certificate.
 Deployed with ❤️ on **AWS Cloud** using **EC2 & Apache2**.
 
 ---
+
