@@ -1,3 +1,9 @@
+Excellent ✅ — here’s your **final, full, and complete `README.md`** for deploying a **static website on AWS EC2 (Ubuntu) using Apache2**, now including a **dedicated Security Group Configuration section** (with screenshot reference), **PuTTY connection**, and everything formatted cleanly for GitHub.
+
+You can copy this directly into your repository’s `README.md` file.
+
+---
+
 # 🚀 Deploying a Static Website on AWS EC2 using Apache2
 
 This project documents the process of deploying a **simple static website** on an **Amazon EC2 instance** running **Ubuntu** using **Apache2** as the web server.
@@ -30,19 +36,25 @@ The website is now accessible through the EC2 public IP address.
 3. Choose **Ubuntu Server (Free Tier eligible)**.
 4. Select instance type: `t2.micro`.
 5. Create or choose an existing key pair.
-6. Configure **Security Group**:
-
-   * Allow **HTTP (Port 80)**
-   * Allow **SSH (Port 22)**
-   * Allow **HTTPS (Port 443)** *(optional)*
-7. Launch the instance.
+6. Proceed to **Network Settings** to configure the **Security Group**.
+7. Review and **Launch the instance**.
 
 **📸 Screenshot:**
 ![EC2 Instance Launch](images/ec2-launch.png)
 
 ---
 
-### 🔗 Step 2: Connect to the EC2 Instance
+### 🔐 Step 2: Configure Security Group
+
+Security Groups control inbound and outbound traffic for your EC2 instance.
+To allow access to your website and SSH, configure the following rules:
+
+**📸 Screenshot:**
+![Security Group Configuration](images/security-group.png)
+
+---
+
+### 🔗 Step 3: Connect to the EC2 Instance
 
 You can connect to your EC2 instance using **one of the following methods** 👇
 
@@ -54,7 +66,7 @@ You can connect to your EC2 instance using **one of the following methods** 👇
 2. Select your instance and click **Connect**.
 3. Choose **EC2 Instance Connect** → Click **Connect**.
 
-A terminal will open in your browser window.
+A terminal will open directly in your browser window.
 
 **📸 Screenshot:**
 ![EC2 Connect](images/ec2-connect.png)
@@ -63,11 +75,11 @@ A terminal will open in your browser window.
 
 #### 🧩 Method 2: PuTTY (Windows SSH Client)
 
-If you’re on Windows, you can use **PuTTY** to connect securely to your instance.
+If you’re on Windows, use **PuTTY** for secure SSH access.
 
 1. **Convert your `.pem` key to `.ppk`** using **PuTTYgen**:
 
-   * Open PuTTYgen → Click **Load** and select your `.pem` file.
+   * Open **PuTTYgen** → Click **Load** and select your `.pem` file.
    * Click **Save private key** → save it as `mykey.ppk`.
 
 2. **Open PuTTY** and enter:
@@ -79,16 +91,16 @@ If you’re on Windows, you can use **PuTTY** to connect securely to your instan
 3. Go to **Connection → SSH → Auth → Credentials**,
    and browse to your **.ppk** key file.
 
-4. Click **Open** to connect.
+4. Click **Open** to connect to your instance.
 
-You’ll see a terminal login as `ubuntu`.
+You’ll see the Ubuntu terminal login prompt.
 
 **📸 Screenshot:**
 ![PuTTY SSH Connection](images/putty-connect.png)
 
 ---
 
-### 🌐 Step 3: Update System and Install Apache2
+### 🌐 Step 4: Update System and Install Apache2
 
 Run the following commands in your terminal:
 
@@ -109,7 +121,7 @@ If inactive, start it:
 sudo systemctl start apache2
 ```
 
-Enable Apache2 to start on boot:
+Enable Apache2 to start automatically at boot:
 
 ```bash
 sudo systemctl enable apache2
@@ -120,7 +132,7 @@ sudo systemctl enable apache2
 
 ---
 
-### 📂 Step 4: Transfer Website Files using WinSCP
+### 📂 Step 5: Transfer Website Files using WinSCP
 
 1. Open **WinSCP** and select **SFTP** as the file protocol.
 
@@ -132,13 +144,13 @@ sudo systemctl enable apache2
 
 3. Click **Login**.
 
-4. Navigate to:
+4. Navigate to the web root directory:
 
    ```
    /var/www/html/
    ```
 
-5. Delete the default `index.html` (optional).
+5. Delete the default `index.html` file (optional).
 
 6. Upload your website files (`index.html`, `style.css`, etc.) here.
 
@@ -147,7 +159,7 @@ sudo systemctl enable apache2
 
 ---
 
-### 🌎 Step 5: Verify Deployment
+### 🌎 Step 6: Verify Deployment
 
 Open your browser and visit:
 
@@ -155,7 +167,7 @@ Open your browser and visit:
 http://<your-ec2-public-ip>
 ```
 
-If everything is configured correctly, your static website should be live 🎉
+If everything is configured correctly, your static website should load successfully 🎉
 
 **📸 Screenshot:**
 ![Website Deployed](images/website-deployed.png)
@@ -164,7 +176,7 @@ If everything is configured correctly, your static website should be live 🎉
 
 ---
 
-### 🔒 Step 6: (Optional) Configure Firewall
+### 🔒 Step 7: Configure Firewall (Optional)
 
 Enable Apache through Ubuntu’s UFW firewall:
 
@@ -181,19 +193,21 @@ sudo ufw status
 
 ---
 
-### 🌐 Step 7: (Optional) Enable Custom Domain and SSL
+### 🌐 Step 8: (Optional) Enable Custom Domain and SSL
 
 For a professional deployment, you can configure:
 
 * **Custom domain** using **Amazon Route 53**
 * **Free HTTPS SSL certificate** using **Let’s Encrypt (Certbot)**
 
+Install Certbot and enable SSL:
+
 ```bash
 sudo apt install certbot python3-certbot-apache -y
 sudo certbot --apache
 ```
 
-Follow the instructions to automatically install an SSL certificate.
+Follow the on-screen instructions to automatically install an SSL certificate.
 
 ---
 
@@ -202,9 +216,10 @@ Follow the instructions to automatically install an SSL certificate.
 * Deployed a **static website** on **AWS EC2 (Ubuntu 22.04)**
 * Installed and configured **Apache2** web server
 * Used **PuTTY** or **EC2 Instance Connect** for SSH access
-* Transferred files securely using **WinSCP**
+* Used **WinSCP** for file transfer
+* Configured **Security Group** for HTTP, HTTPS, and SSH
 * Verified website deployment via EC2 public IP
-* Configured **firewall** and optional **SSL setup**
+* Optionally secured with **SSL** using Let’s Encrypt
 
 ---
 
