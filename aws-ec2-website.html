@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to My AWS EC2 Site</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .status {
+            background: #10b981;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.8;
+            }
+        }
+
+        .info-card {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+        }
+
+        .info-card h2 {
+            color: #334155;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
+        .info-card p {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-box h3 {
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+
+        .stat-box p {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px 5px;
+            display: inline-block;
+        }
+
+        .button:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #64748b;
+            font-size: 0.9em;
+        }
+
+        #visitor-count {
+            font-weight: bold;
+            color: #667eea;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Welcome to My AWS EC2 Site</h1>
+        
+        <div class="status">
+            ✅ Server is Running Successfully!
+        </div>
+
+        <div class="info-card">
+            <h2>About This Deployment</h2>
+            <p>This website is successfully deployed on AWS EC2! It's a fully functional, responsive web application that demonstrates cloud hosting capabilities.</p>
+        </div>
+
+        <div class="info-card">
+            <h2>Server Information</h2>
+            <p><strong>Status:</strong> Online</p>
+            <p><strong>Platform:</strong> AWS EC2</p>
+            <p><strong>Deployed:</strong> <span id="current-time"></span></p>
+            <p><strong>Visitors:</strong> <span id="visitor-count">0</span></p>
+        </div>
+
+        <div class="stats">
+            <div class="stat-box" onclick="incrementCounter('uptime')">
+                <h3 id="uptime">99.9%</h3>
+                <p>Uptime</p>
+            </div>
+            <div class="stat-box" onclick="incrementCounter('requests')">
+                <h3 id="requests">1,234</h3>
+                <p>Requests</p>
+            </div>
+            <div class="stat-box" onclick="incrementCounter('speed')">
+                <h3 id="speed">45ms</h3>
+                <p>Avg Response</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <button class="button" onclick="testConnection()">Test Connection</button>
+            <button class="button" onclick="showAlert()">Click Me!</button>
+        </div>
+
+        <div class="footer">
+            <p>Deployed on AWS EC2 | Built with HTML, CSS & JavaScript</p>
+            <p>© 2025 - All Rights Reserved</p>
+        </div>
+    </div>
+
+    <script>
+        // Update current time
+        function updateTime() {
+            const now = new Date();
+            document.getElementById('current-time').textContent = now.toLocaleString();
+        }
+        updateTime();
+        setInterval(updateTime, 1000);
+
+        // Simulate visitor count
+        let visitors = Math.floor(Math.random() * 1000) + 100;
+        document.getElementById('visitor-count').textContent = visitors;
+
+        // Increment visitor count periodically
+        setInterval(() => {
+            visitors += Math.floor(Math.random() * 3);
+            document.getElementById('visitor-count').textContent = visitors;
+        }, 5000);
+
+        // Test connection button
+        function testConnection() {
+            const statusDiv = document.querySelector('.status');
+            statusDiv.textContent = '🔄 Testing connection...';
+            statusDiv.style.background = '#f59e0b';
+            
+            setTimeout(() => {
+                statusDiv.textContent = '✅ Connection Successful!';
+                statusDiv.style.background = '#10b981';
+            }, 1500);
+        }
+
+        // Show alert
+        function showAlert() {
+            alert('Hello from AWS EC2! 🎉\n\nYour website is working perfectly!');
+        }
+
+        // Counter for stat boxes
+        const counters = {
+            uptime: 99.9,
+            requests: 1234,
+            speed: 45
+        };
+
+        function incrementCounter(type) {
+            const element = document.getElementById(type);
+            
+            if (type === 'uptime') {
+                counters.uptime = Math.min(100, counters.uptime + 0.1);
+                element.textContent = counters.uptime.toFixed(1) + '%';
+            } else if (type === 'requests') {
+                counters.requests += Math.floor(Math.random() * 50) + 1;
+                element.textContent = counters.requests.toLocaleString();
+            } else if (type === 'speed') {
+                counters.speed = Math.max(10, counters.speed - Math.floor(Math.random() * 5));
+                element.textContent = counters.speed + 'ms';
+            }
+        }
+    </script>
+</body>
+</html>
