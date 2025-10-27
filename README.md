@@ -1,7 +1,3 @@
-Excellent ✅ — here’s your **final, full, and complete `README.md`** for deploying a **static website on AWS EC2 (Ubuntu) using Apache2**, now including a **dedicated Security Group Configuration section** (with screenshot reference), **PuTTY connection**, and everything formatted cleanly for GitHub.
-
-You can copy this directly into your repository’s `README.md` file.
-
 ---
 
 # 🚀 Deploying a Static Website on AWS EC2 using Apache2
@@ -226,5 +222,6 @@ Follow the on-screen instructions to automatically install an SSL certificate.
 Deployed with ❤️ on **AWS Cloud** using **EC2 & Apache2**.
 
 ---
+
 
 
